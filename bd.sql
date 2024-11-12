@@ -84,7 +84,7 @@ CREATE TABLE Permissoes (
 CREATE TABLE Transmissao (
     URL VARCHAR(255) PRIMARY KEY,
     Data_Hora TIMESTAMP NOT NULL,
-    Partida_ID SERIAL NOT NULL,
+    Partida_ID INTEGER NOT NULL,
     FOREIGN KEY (Partida_ID) REFERENCES Partida(ID)
 );
 
@@ -160,7 +160,7 @@ CREATE TABLE Partida (
 
 -- Criação da tabela Apita
 CREATE TABLE Apita (
-    Partida_ID SERIAL,
+    Partida_ID INTEGER,
     Árbitro_CPF VARCHAR(11),
     PRIMARY KEY (Partida_ID, Árbitro_CPF),
     FOREIGN KEY (Partida_ID) REFERENCES Partida(ID),
@@ -169,7 +169,7 @@ CREATE TABLE Apita (
 
 -- Criação da tabela Joga
 CREATE TABLE Joga (
-    Partida_ID SERIAL,
+    Partida_ID INTEGER,
     Time_Esporte VARCHAR(100),
     Time_Nome VARCHAR(100),
     PRIMARY KEY (Partida_ID, Time_Esporte, Time_Nome),
