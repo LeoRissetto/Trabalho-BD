@@ -43,8 +43,8 @@ CREATE TABLE Time (
     Nome VARCHAR(100),
     Treinador_CPF VARCHAR(11) NOT NULL,
     PRIMARY KEY (Esporte_Nome, Nome),
-    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome),
-    FOREIGN KEY (Treinador_CPF) REFERENCES Treinador(CPF)
+    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome) ON DELETE CASCADE,
+    FOREIGN KEY (Treinador_CPF) REFERENCES Treinador(CPF) ON DELETE SET NULL
 );
 
 -- Criação da tabela Joga_Por
@@ -53,8 +53,8 @@ CREATE TABLE Joga_Por (
     Time_Nome VARCHAR(100),
     Jogador_CPF VARCHAR(11),
     PRIMARY KEY (Time_Esporte, Time_Nome, Jogador_CPF),
-    FOREIGN KEY (Time_Esporte, Time_Nome) REFERENCES Time(Esporte_Nome, Nome),
-    FOREIGN KEY (Jogador_CPF) REFERENCES Jogador(CPF)
+    FOREIGN KEY (Time_Esporte, Time_Nome) REFERENCES Time(Esporte_Nome, Nome) ON DELETE CASCADE,
+    FOREIGN KEY (Jogador_CPF) REFERENCES Jogador(CPF) ON DELETE CASCADE
 );
 
 -- Criação da tabela Usuário
@@ -69,7 +69,7 @@ CREATE TABLE Usuario (
 CREATE TABLE Moderador (
     Usuário_Email VARCHAR(100),
     PRIMARY KEY (Usuário_Email),
-    FOREIGN KEY (Usuário_Email) REFERENCES Usuario(Email)
+    FOREIGN KEY (Usuário_Email) REFERENCES Usuario(Email) ON DELETE CASCADE
 );
 
 -- Criação da tabela Permissões
@@ -77,7 +77,7 @@ CREATE TABLE Permissoes (
     Moderador_Usuário VARCHAR(100),
     Permissao VARCHAR(50),
     PRIMARY KEY (Moderador_Usuário, Permissao),
-    FOREIGN KEY (Moderador_Usuário) REFERENCES Moderador(Usuário_Email)
+    FOREIGN KEY (Moderador_Usuário) REFERENCES Moderador(Usuário_Email) ON DELETE CASCADE
 );
 
 -- Criação da tabela Transmissão
@@ -85,7 +85,7 @@ CREATE TABLE Transmissao (
     URL VARCHAR(255) PRIMARY KEY,
     Data_Hora TIMESTAMP NOT NULL,
     Partida_ID INTEGER NOT NULL,
-    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID)
+    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID) ON DELETE CASCADE
 );
 
 -- Criação da tabela Assistido
@@ -95,8 +95,8 @@ CREATE TABLE Assistido (
     Data_Hora TIMESTAMP,
     Tempo_Assistido INTERVAL NOT NULL,
     PRIMARY KEY (Usuário_Email, Transmissão_URL, Data_Hora),
-    FOREIGN KEY (Usuário_Email) REFERENCES Usuario(Email),
-    FOREIGN KEY (Transmissão_URL) REFERENCES Transmissao(URL)
+    FOREIGN KEY (Usuário_Email) REFERENCES Usuario(Email) ON DELETE CASCADE,
+    FOREIGN KEY (Transmissão_URL) REFERENCES Transmissao(URL) ON DELETE CASCADE
 );
 
 -- Criação da tabela Comenta
@@ -104,8 +104,8 @@ CREATE TABLE Comenta (
     Transmissão_URL VARCHAR(255),
     Narrador_CPF VARCHAR(11),
     PRIMARY KEY (Transmissão_URL, Narrador_CPF),
-    FOREIGN KEY (Transmissão_URL) REFERENCES Transmissao(URL),
-    FOREIGN KEY (Narrador_CPF) REFERENCES Narrador(CPF)
+    FOREIGN KEY (Transmissão_URL) REFERENCES Transmissao(URL) ON DELETE CASCADE,
+    FOREIGN KEY (Narrador_CPF) REFERENCES Narrador(CPF) ON DELETE CASCADE
 );
 
 -- Criação da tabela Torneio
@@ -115,7 +115,7 @@ CREATE TABLE Torneio (
     Data_Fim DATE,
     Esporte_Nome VARCHAR(100) NOT NULL,
     PRIMARY KEY (Nome, Data_Início),
-    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome)
+    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome) ON DELETE CASCADE
 );
 
 -- Criação da tabela Patrocinador
@@ -131,8 +131,8 @@ CREATE TABLE Investe (
     Torneio_Data_Início DATE,
     Valor_Investido DECIMAL(15, 2),
     PRIMARY KEY (Patrocinador_CNPJ, Torneio_Nome, Torneio_Data_Início),
-    FOREIGN KEY (Patrocinador_CNPJ) REFERENCES Patrocinador(CNPJ),
-    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início)
+    FOREIGN KEY (Patrocinador_CNPJ) REFERENCES Patrocinador(CNPJ) ON DELETE CASCADE,
+    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE
 );
 
 -- Criação da tabela Local
@@ -154,8 +154,8 @@ CREATE TABLE Partida (
     Local_Nome VARCHAR(100) NOT NULL,
     Data_Hora TIMESTAMP NOT NULL,
     Resultado VARCHAR(255),
-    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início),
-    FOREIGN KEY (Local_Nome) REFERENCES Local(Nome)
+    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE,
+    FOREIGN KEY (Local_Nome) REFERENCES Local(Nome) ON DELETE RESTRICT
 );
 
 -- Criação da tabela Apita
@@ -163,8 +163,8 @@ CREATE TABLE Apita (
     Partida_ID INTEGER,
     Árbitro_CPF VARCHAR(11),
     PRIMARY KEY (Partida_ID, Árbitro_CPF),
-    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID),
-    FOREIGN KEY (Árbitro_CPF) REFERENCES Arbitro(CPF)
+    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Árbitro_CPF) REFERENCES Arbitro(CPF) ON DELETE CASCADE
 );
 
 -- Criação da tabela Joga
@@ -173,6 +173,6 @@ CREATE TABLE Joga (
     Time_Esporte VARCHAR(100),
     Time_Nome VARCHAR(100),
     PRIMARY KEY (Partida_ID, Time_Esporte, Time_Nome),
-    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID),
-    FOREIGN KEY (Time_Esporte, Time_Nome) REFERENCES Time(Esporte_Nome, Nome)
+    FOREIGN KEY (Partida_ID) REFERENCES Partida(ID) ON DELETE CASCADE,
+    FOREIGN KEY (Time_Esporte, Time_Nome) REFERENCES Time(Esporte_Nome, Nome) ON DELETE CASCADE
 );
