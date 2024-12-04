@@ -1,19 +1,31 @@
-version: '3.8'
-
 services:
   postgres:
-    image: postgres
-    container_name: postgres_container
+    image: postgres:latest
+    container_name: trabalho_bd
     restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: myhkun-neJsez-9zuhjo
-      POSTGRES_DB: meu_banco
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d
+      - trabalho_bd_data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trabalho_backend
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@trabalho_bd:5432/postgres"
 
 volumes:
-  postgres_data:
+  trabalho_bd_data:
+    driver: local

@@ -37,6 +37,53 @@ CREATE TABLE Esporte (
     Nome VARCHAR(100) PRIMARY KEY
 );
 
+-- Criação da tabela Usuário
+CREATE TABLE Usuario (
+    Email VARCHAR(100) PRIMARY KEY,
+    Senha VARCHAR(255) NOT NULL,
+    Nome VARCHAR(100) NOT NULL,
+    Data_Nascimento DATE
+);
+
+-- Criação da tabela Patrocinador
+CREATE TABLE Patrocinador (
+    CNPJ VARCHAR(14) PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL
+);
+
+-- Criação da tabela Local
+CREATE TABLE Local (
+    Nome VARCHAR(100) PRIMARY KEY,
+    Rua VARCHAR(100) NOT NULL,
+    Numero INT NOT NULL,
+    Estado VARCHAR(50) NOT NULL,
+    Cidade VARCHAR(50) NOT NULL,
+    País VARCHAR(50) NOT NULL,
+    Capacidade INT
+);
+
+-- Criação da tabela Torneio
+CREATE TABLE Torneio (
+    Nome VARCHAR(100),
+    Data_Início DATE,
+    Data_Fim DATE,
+    Esporte_Nome VARCHAR(100) NOT NULL,
+    PRIMARY KEY (Nome, Data_Início),
+    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome) ON DELETE CASCADE
+);
+
+-- Criação da tabela Partida
+CREATE TABLE Partida (
+    ID SERIAL PRIMARY KEY,
+    Torneio_Nome VARCHAR(100) NOT NULL,
+    Torneio_Data_Início DATE NOT NULL,
+    Local_Nome VARCHAR(100) NOT NULL,
+    Data_Hora TIMESTAMP NOT NULL,
+    Resultado VARCHAR(255),
+    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE,
+    FOREIGN KEY (Local_Nome) REFERENCES Local(Nome) ON DELETE RESTRICT
+);
+
 -- Criação da tabela Time
 CREATE TABLE Time (
     Esporte_Nome VARCHAR(100),
@@ -55,14 +102,6 @@ CREATE TABLE Joga_Por (
     PRIMARY KEY (Time_Esporte, Time_Nome, Jogador_CPF),
     FOREIGN KEY (Time_Esporte, Time_Nome) REFERENCES Time(Esporte_Nome, Nome) ON DELETE CASCADE,
     FOREIGN KEY (Jogador_CPF) REFERENCES Jogador(CPF) ON DELETE CASCADE
-);
-
--- Criação da tabela Usuário
-CREATE TABLE Usuario (
-    Email VARCHAR(100) PRIMARY KEY,
-    Senha VARCHAR(255) NOT NULL,
-    Nome VARCHAR(100) NOT NULL,
-    Data_Nascimento DATE
 );
 
 -- Criação da tabela Moderador
@@ -108,22 +147,6 @@ CREATE TABLE Comenta (
     FOREIGN KEY (Narrador_CPF) REFERENCES Narrador(CPF) ON DELETE CASCADE
 );
 
--- Criação da tabela Torneio
-CREATE TABLE Torneio (
-    Nome VARCHAR(100),
-    Data_Início DATE,
-    Data_Fim DATE,
-    Esporte_Nome VARCHAR(100) NOT NULL,
-    PRIMARY KEY (Nome, Data_Início),
-    FOREIGN KEY (Esporte_Nome) REFERENCES Esporte(Nome) ON DELETE CASCADE
-);
-
--- Criação da tabela Patrocinador
-CREATE TABLE Patrocinador (
-    CNPJ VARCHAR(14) PRIMARY KEY,
-    Nome VARCHAR(100) NOT NULL
-);
-
 -- Criação da tabela Investe
 CREATE TABLE Investe (
     Patrocinador_CNPJ VARCHAR(14),
@@ -133,29 +156,6 @@ CREATE TABLE Investe (
     PRIMARY KEY (Patrocinador_CNPJ, Torneio_Nome, Torneio_Data_Início),
     FOREIGN KEY (Patrocinador_CNPJ) REFERENCES Patrocinador(CNPJ) ON DELETE CASCADE,
     FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE
-);
-
--- Criação da tabela Local
-CREATE TABLE Local (
-    Nome VARCHAR(100) PRIMARY KEY,
-    Rua VARCHAR(100) NOT NULL,
-    Numero INT NOT NULL,
-    Estado VARCHAR(50) NOT NULL,
-    Cidade VARCHAR(50) NOT NULL,
-    País VARCHAR(50) NOT NULL,
-    Capacidade INT
-);
-
--- Criação da tabela Partida
-CREATE TABLE Partida (
-    ID SERIAL PRIMARY KEY,
-    Torneio_Nome VARCHAR(100) NOT NULL,
-    Torneio_Data_Início DATE NOT NULL,
-    Local_Nome VARCHAR(100) NOT NULL,
-    Data_Hora TIMESTAMP NOT NULL,
-    Resultado VARCHAR(255),
-    FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE,
-    FOREIGN KEY (Local_Nome) REFERENCES Local(Nome) ON DELETE RESTRICT
 );
 
 -- Criação da tabela Apita
