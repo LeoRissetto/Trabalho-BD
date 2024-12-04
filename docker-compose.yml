@@ -30,7 +30,6 @@ services:
     volumes:
       - ./Python:/app
     command: python /app/app/sistema.py
-    restart: on-failure
     networks:
       - app_network
 
