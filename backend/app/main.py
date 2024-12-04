@@ -13,4 +13,4 @@ app.include_router(router)
 
 @app.get("/")
 def root():
-    return {"message": "Backend está funcionando!"}
+    return {"message": "Backend esta funcionando!"}

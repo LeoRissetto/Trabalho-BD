@@ -1,4 +1,3 @@
--- Criação da tabela Jogador
 CREATE TABLE Jogador (
     CPF VARCHAR(11) PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
@@ -53,13 +52,15 @@ CREATE TABLE Patrocinador (
 
 -- Criação da tabela Local
 CREATE TABLE Local (
-    Nome VARCHAR(100) PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
     Rua VARCHAR(100) NOT NULL,
     Numero INT NOT NULL,
     Estado VARCHAR(50) NOT NULL,
     Cidade VARCHAR(50) NOT NULL,
     País VARCHAR(50) NOT NULL,
-    Capacidade INT
+    Capacidade INT, 
+    UNIQUE (Nome, Rua, Numero, Cidade, Estado, País)
 );
 
 -- Criação da tabela Torneio
@@ -77,11 +78,12 @@ CREATE TABLE Partida (
     ID SERIAL PRIMARY KEY,
     Torneio_Nome VARCHAR(100) NOT NULL,
     Torneio_Data_Início DATE NOT NULL,
-    Local_Nome VARCHAR(100) NOT NULL,
+    Local_ID INT NOT NULL,
     Data_Hora TIMESTAMP NOT NULL,
     Resultado VARCHAR(255),
     FOREIGN KEY (Torneio_Nome, Torneio_Data_Início) REFERENCES Torneio(Nome, Data_Início) ON DELETE CASCADE,
-    FOREIGN KEY (Local_Nome) REFERENCES Local(Nome) ON DELETE RESTRICT
+    FOREIGN KEY (Local_ID) REFERENCES Local(ID) ON DELETE RESTRICT,
+    UNIQUE (Torneio_Nome, Torneio_Data_Início, Local_ID, Data_Hora)
 );
 
 -- Criação da tabela Time

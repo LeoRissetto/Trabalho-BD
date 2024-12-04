@@ -1,26 +1,26 @@
 -- Inserindo dados na tabela Jogador
 INSERT INTO Jogador (CPF, Nome, Data_Nascimento, Genero, Altura, Peso) VALUES
-('12345678901', 'João Silva', '1990-05-15', 'Masculino', 1.80, 75.5),
-('23456789012', 'Maria Oliveira', '1992-08-22', 'Feminino', 1.65, 60.2),
-('34567890123', 'Carlos Pereira', '1985-03-10', 'Masculino', 1.75, 80.0);
+('12345678901', 'João Silva', '1995-05-12', 'Masculino', 1.80, 75.0),
+('98765432109', 'Ana Oliveira', '1997-03-22', 'Feminino', 1.70, 60.0),
+('56789012345', 'Carlos Lima', '1990-08-15', 'Masculino', 1.85, 82.5);
 
 -- Inserindo dados na tabela Treinador
 INSERT INTO Treinador (CPF, Nome, Data_Nascimento, Genero) VALUES
-('12312312312', 'Ricardo Souza', '1980-01-25', 'Masculino'),
-('23423423423', 'Ana Costa', '1983-06-30', 'Feminino'),
-('34534534534', 'José Almeida', '1978-11-14', 'Masculino');
+('11111111111', 'Roberto Costa', '1980-11-05', 'Masculino'),
+('22222222222', 'Mariana Souza', '1985-07-19', 'Feminino'),
+('33333333333', 'Pedro Gonçalves', '1978-03-01', 'Masculino');
 
 -- Inserindo dados na tabela Árbitro
 INSERT INTO Arbitro (CPF, Nome, Data_Nascimento, Genero) VALUES
-('45645645645', 'Lucas Martins', '1986-07-10', 'Masculino'),
-('56756756756', 'Juliana Ramos', '1990-12-01', 'Feminino'),
-('67867867867', 'Felipe Oliveira', '1982-04-17', 'Masculino');
+('44444444444', 'Rafael Santos', '1992-02-14', 'Masculino'),
+('55555555555', 'Luciana Almeida', '1988-06-30', 'Feminino'),
+('66666666666', 'Paulo Henrique', '1985-09-18', 'Masculino');
 
 -- Inserindo dados na tabela Narrador
 INSERT INTO Narrador (CPF, Nome, Data_Nascimento, Genero) VALUES
-('78978978978', 'Gustavo Pereira', '1975-09-13', 'Masculino'),
-('89089089089', 'Patrícia Lima', '1989-01-05', 'Feminino'),
-('90190190190', 'Carlos Silva', '1981-03-28', 'Masculino');
+('77777777777', 'Ricardo Bastos', '1980-04-10', 'Masculino'),
+('88888888888', 'Carla Mendes', '1990-12-25', 'Feminino'),
+('99999999999', 'Fernanda Ribeiro', '1983-03-12', 'Feminino');
 
 -- Inserindo dados na tabela Esporte
 INSERT INTO Esporte (Nome) VALUES
@@ -30,87 +30,87 @@ INSERT INTO Esporte (Nome) VALUES
 
 -- Inserindo dados na tabela Usuário
 INSERT INTO Usuario (Email, Senha, Nome, Data_Nascimento) VALUES
-('joao.silva@email.com', 'senha123', 'João Silva', '1990-05-15'),
-('maria.oliveira@email.com', 'senha123', 'Maria Oliveira', '1992-08-22'),
-('carlos.pereira@email.com', 'senha123', 'Carlos Pereira', '1985-03-10');
+('joao@gmail.com', 'senha123', 'João Santos', '1998-04-18'),
+('ana@hotmail.com', 'senha456', 'Ana Carvalho', '2000-01-10'),
+('carlos@yahoo.com', 'senha789', 'Carlos Souza', '1995-07-22');
 
 -- Inserindo dados na tabela Patrocinador
 INSERT INTO Patrocinador (CNPJ, Nome) VALUES
-('12345678000123', 'Patrocinador A'),
-('23456789000123', 'Patrocinador B'),
-('34567890000123', 'Patrocinador C');
+('12345678000123', 'Nike'),
+('98765432000198', 'Adidas'),
+('56789012000156', 'Puma');
 
 -- Inserindo dados na tabela Local
 INSERT INTO Local (Nome, Rua, Numero, Estado, Cidade, País, Capacidade) VALUES
-('Estádio Nacional', 'Rua A', 100, 'SP', 'São Paulo', 'Brasil', 50000),
-('Ginásio Municipal', 'Rua B', 150, 'MG', 'Belo Horizonte', 'Brasil', 15000),
-('Arena do Futuro', 'Rua C', 200, 'RJ', 'Rio de Janeiro', 'Brasil', 20000);
+('Estádio Nacional', 'Avenida Central', 123, 'São Paulo', 'São Paulo', 'Brasil', 50000),
+('Ginásio Olímpico', 'Rua das Palmeiras', 45, 'Rio de Janeiro', 'Rio de Janeiro', 'Brasil', 20000),
+('Arena Esportiva', 'Avenida Atlântica', 678, 'Minas Gerais', 'Belo Horizonte', 'Brasil', 30000);
 
 -- Inserindo dados na tabela Torneio
 INSERT INTO Torneio (Nome, Data_Início, Data_Fim, Esporte_Nome) VALUES
-('Copa do Mundo', '2026-06-01', '2026-07-01', 'Futebol'),
-('NBA Finals', '2025-06-01', '2025-06-15', 'Basquete'),
-('Campeonato Brasileiro', '2024-08-10', '2024-12-01', 'Futebol');
+('Copa Brasil', '2024-03-01', '2024-03-30', 'Futebol'),
+('Campeonato Nacional', '2024-04-01', '2024-04-20', 'Basquete'),
+('Liga de Vôlei', '2024-05-01', '2024-05-15', 'Vôlei');
 
 -- Inserindo dados na tabela Partida
-INSERT INTO Partida (Torneio_Nome, Torneio_Data_Início, Local_Nome, Data_Hora, Resultado) VALUES
-('Copa do Mundo', '2026-06-01', 'Estádio Nacional', '2026-06-01 15:00:00', '2-1'),
-('NBA Finals', '2025-06-01', 'Ginásio Municipal', '2025-06-01 20:00:00', '104-98'),
-('Campeonato Brasileiro', '2024-08-10', 'Arena do Futuro', '2024-08-10 16:00:00', '3-0');
+INSERT INTO Partida (Torneio_Nome, Torneio_Data_Início, Local_ID, Data_Hora, Resultado) VALUES
+('Copa Brasil', '2024-03-01', 1, '2024-03-05 16:00:00', '3x1'),
+('Campeonato Nacional', '2024-04-01', 2, '2024-04-10 18:00:00', '85x78'),
+('Liga de Vôlei', '2024-05-01', 3, '2024-05-12 15:00:00', '2x3');
 
 -- Inserindo dados na tabela Time
 INSERT INTO Time (Esporte_Nome, Nome, Treinador_CPF) VALUES
-('Futebol', 'Time A', '12312312312'),
-('Basquete', 'Time B', '23423423423'),
-('Vôlei', 'Time C', '34534534534');
+('Futebol', 'Time A', '11111111111'),
+('Basquete', 'Time B', '22222222222'),
+('Vôlei', 'Time C', '33333333333');
 
 -- Inserindo dados na tabela Joga_Por
 INSERT INTO Joga_Por (Time_Esporte, Time_Nome, Jogador_CPF) VALUES
 ('Futebol', 'Time A', '12345678901'),
-('Basquete', 'Time B', '23456789012'),
-('Vôlei', 'Time C', '34567890123');
+('Basquete', 'Time B', '98765432109'),
+('Vôlei', 'Time C', '56789012345');
 
 -- Inserindo dados na tabela Moderador
 INSERT INTO Moderador (Usuário_Email) VALUES
-('joao.silva@email.com'),
-('maria.oliveira@email.com'),
-('carlos.pereira@email.com');
+('joao@gmail.com'),
+('ana@hotmail.com'),
+('carlos@yahoo.com');
 
--- Inserindo dados na tabela Permissoes
+-- Inserindo dados na tabela Permissões
 INSERT INTO Permissoes (Moderador_Usuário, Permissao) VALUES
-('joao.silva@email.com', 'admin'),
-('maria.oliveira@email.com', 'editor'),
-('carlos.pereira@email.com', 'viewer');
+('joao@gmail.com', 'Editar'),
+('ana@hotmail.com', 'Excluir'),
+('carlos@yahoo.com', 'Criar');
 
--- Inserindo dados na tabela Transmissao
+-- Inserindo dados na tabela Transmissão
 INSERT INTO Transmissao (URL, Data_Hora, Partida_ID) VALUES
-('http://example.com/1', '2026-06-01 15:00:00', 1),
-('http://example.com/2', '2025-06-01 20:00:00', 2),
-('http://example.com/3', '2024-08-10 16:00:00', 3);
+('https://example.com/partida1', '2024-03-05 16:00:00', 1),
+('https://example.com/partida2', '2024-04-10 18:00:00', 2),
+('https://example.com/partida3', '2024-05-12 15:00:00', 3);
 
 -- Inserindo dados na tabela Assistido
 INSERT INTO Assistido (Usuário_Email, Transmissão_URL, Data_Hora, Tempo_Assistido) VALUES
-('joao.silva@email.com', 'http://example.com/1', '2026-06-01 15:00:00', '1:30:00'),
-('maria.oliveira@email.com', 'http://example.com/2', '2025-06-01 20:00:00', '2:00:00'),
-('carlos.pereira@email.com', 'http://example.com/3', '2024-08-10 16:00:00', '2:15:00');
+('joao@gmail.com', 'https://example.com/partida1', '2024-03-05 16:30:00', '00:30:00'),
+('ana@hotmail.com', 'https://example.com/partida2', '2024-04-10 18:15:00', '00:45:00'),
+('carlos@yahoo.com', 'https://example.com/partida3', '2024-05-12 15:20:00', '00:40:00');
 
 -- Inserindo dados na tabela Comenta
 INSERT INTO Comenta (Transmissão_URL, Narrador_CPF) VALUES
-('http://example.com/1', '78978978978'),
-('http://example.com/2', '89089089089'),
-('http://example.com/3', '90190190190');
+('https://example.com/partida1', '77777777777'),
+('https://example.com/partida2', '88888888888'),
+('https://example.com/partida3', '99999999999');
 
 -- Inserindo dados na tabela Investe
 INSERT INTO Investe (Patrocinador_CNPJ, Torneio_Nome, Torneio_Data_Início, Valor_Investido) VALUES
-('12345678000123', 'Copa do Mundo', '2026-06-01', 1000000.00),
-('23456789000123', 'NBA Finals', '2025-06-01', 500000.00),
-('34567890000123', 'Campeonato Brasileiro', '2024-08-10', 200000.00);
+('12345678000123', 'Copa Brasil', '2024-03-01', 500000.00),
+('98765432000198', 'Campeonato Nacional', '2024-04-01', 300000.00),
+('56789012000156', 'Liga de Vôlei', '2024-05-01', 200000.00);
 
 -- Inserindo dados na tabela Apita
 INSERT INTO Apita (Partida_ID, Árbitro_CPF) VALUES
-(1, '45645645645'),
-(2, '56756756756'),
-(3, '67867867867');
+(1, '44444444444'),
+(2, '55555555555'),
+(3, '66666666666');
 
 -- Inserindo dados na tabela Joga
 INSERT INTO Joga (Partida_ID, Time_Esporte, Time_Nome) VALUES
