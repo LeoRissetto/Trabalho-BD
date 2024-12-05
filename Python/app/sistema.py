@@ -2,6 +2,7 @@ import psycopg2
 import os
 from psycopg2 import sql
 from datetime import datetime
+import re  # Biblioteca para expressões regulares
 
 # Função para conectar ao banco usando variáveis de ambiente
 def connect_db():
@@ -15,12 +16,17 @@ def connect_db():
         )
         return conn
     except Exception as e:
-        print("Erro ao conectar ao banco:", e)
+        print(f"Erro ao conectar ao banco: {e}")
         exit()
 
 # Validação de entrada de dados
 def validar_cpf(cpf):
-    return cpf.isdigit() and len(cpf) == 11
+    """
+    Valida se o CPF está no formato correto (XXX.XXX.XXX-XX) e tem 14 caracteres.
+    """
+    if re.match(r"^\d{3}\.\d{3}\.\d{3}-\d{2}$", cpf):
+        return True
+    return False
 
 def validar_data(data):
     try:
@@ -30,36 +36,35 @@ def validar_data(data):
         return False
 
 def validar_genero(genero):
-    return genero.upper() in ["M", "F", "O"]  # M: Masculino, F: Feminino, O: Outros
+    return genero.upper() in ["M", "F"]  # M: Masculino, F: Feminino
 
 # Função para cadastrar jogador
 def cadastrar_jogador():
-    conn = connect_db()
     try:
         # Solicita e valida os dados do jogador
         while True:
-            cpf = input("CPF do Jogador (11 dígitos): ")
+            cpf = input("CPF do Jogador (formato XXX.XXX.XXX-XX): ").strip()
             if validar_cpf(cpf):
                 break
-            print("CPF inválido! Tente novamente.")
+            print("CPF inválido! Use o formato XXX.XXX.XXX-XX.")
 
         nome = input("Nome do Jogador: ").strip()
 
         while True:
-            data_nascimento = input("Data de Nascimento (YYYY-MM-DD): ")
+            data_nascimento = input("Data de Nascimento (YYYY-MM-DD): ").strip()
             if validar_data(data_nascimento):
                 break
             print("Data inválida! Tente novamente.")
 
         while True:
-            genero = input("Gênero do Jogador (M/F/O): ").upper()
+            genero = input("Gênero do Jogador (M/F): ").strip().upper()
             if validar_genero(genero):
                 break
-            print("Gênero inválido! Use M, F ou O.")
+            print("Gênero inválido! Use M ou F.")
 
         while True:
             try:
-                altura = float(input("Altura do Jogador (em metros, ex: 1.80): "))
+                altura = float(input("Altura do Jogador (em metros, ex: 1.80): ").strip())
                 if altura > 0:
                     break
             except ValueError:
@@ -68,48 +73,47 @@ def cadastrar_jogador():
 
         while True:
             try:
-                peso = float(input("Peso do Jogador (em kg, ex: 70.5): "))
+                peso = float(input("Peso do Jogador (em kg, ex: 70.5): ").strip())
                 if peso > 0:
                     break
             except ValueError:
                 pass
             print("Peso inválido! Insira um número positivo.")
 
-        # Cria o cursor e executa a inserção
-        cur = conn.cursor()
-        query = sql.SQL("""
-            INSERT INTO Jogador (CPF, Nome, Data_Nascimento, Genero, Altura, Peso)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """)
-        cur.execute(query, (cpf, nome, data_nascimento, genero, altura, peso))
-        conn.commit()
+        # Conecta ao banco e realiza a inserção
+        with connect_db() as conn:
+            with conn.cursor() as cur:
+                query = sql.SQL("""
+                    INSERT INTO Jogadores (CPF, Nome, Data_Nascimento, Genero, Altura, Peso)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """)
+                cur.execute(query, (cpf, nome, data_nascimento, genero, altura, peso))
+                conn.commit()
 
         print("Jogador cadastrado com sucesso!")
+    except psycopg2.Error as e:
+        print(f"Erro ao cadastrar jogador no banco: {e}")
     except Exception as e:
-        conn.rollback()
-        print("Erro ao cadastrar jogador:", e)
-    finally:
-        if cur:
-            cur.close()
-        conn.close()
+        print(f"Erro inesperado: {e}")
 
 # Função para consultar jogador
 def consultar_jogador():
-    conn = connect_db()
     try:
-        cpf = input("Informe o CPF do jogador que deseja consultar (11 dígitos): ")
+        cpf = input("Informe o CPF do jogador que deseja consultar (formato XXX.XXX.XXX-XX): ").strip()
         if not validar_cpf(cpf):
-            print("CPF inválido!")
+            print("CPF inválido! Use o formato XXX.XXX.XXX-XX.")
             return
 
-        cur = conn.cursor()
-        query = sql.SQL("""
-            SELECT CPF, Nome, Data_Nascimento, Genero, Altura, Peso
-            FROM Jogador
-            WHERE CPF = %s
-        """)
-        cur.execute(query, (cpf,))
-        jogador = cur.fetchone()
+        # Conecta ao banco e realiza a consulta
+        with connect_db() as conn:
+            with conn.cursor() as cur:
+                query = sql.SQL("""
+                    SELECT CPF, Nome, Data_Nascimento, Genero, Altura, Peso
+                    FROM Jogadores
+                    WHERE CPF = %s
+                """)
+                cur.execute(query, (cpf,))
+                jogador = cur.fetchone()
 
         if jogador:
             print("\n--- Dados do Jogador ---")
@@ -121,13 +125,10 @@ def consultar_jogador():
             print(f"Peso: {jogador[5]} kg")
         else:
             print("Jogador não encontrado.")
-
+    except psycopg2.Error as e:
+        print(f"Erro ao consultar jogador no banco: {e}")
     except Exception as e:
-        print("Erro ao consultar jogador:", e)
-    finally:
-        if cur:
-            cur.close()
-        conn.close()
+        print(f"Erro inesperado: {e}")
 
 # Menu principal
 def menu():
@@ -137,7 +138,7 @@ def menu():
         print("2. Consultar Jogador")
         print("3. Sair")
 
-        opcao = input("Escolha uma opção: ")
+        opcao = input("Escolha uma opção: ").strip()
         if opcao == "1":
             cadastrar_jogador()
         elif opcao == "2":

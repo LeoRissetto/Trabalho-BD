@@ -1,119 +1,119 @@
--- Inserindo dados na tabela Jogador
-INSERT INTO Jogador (CPF, Nome, Data_Nascimento, Genero, Altura, Peso) VALUES
-('12345678901', 'João Silva', '1995-05-12', 'Masculino', 1.80, 75.0),
-('98765432109', 'Ana Oliveira', '1997-03-22', 'Feminino', 1.70, 60.0),
-('56789012345', 'Carlos Lima', '1990-08-15', 'Masculino', 1.85, 82.5);
+-- Tabela de Usuários
+INSERT INTO Usuarios (email, senha, nome, data_nasc) VALUES
+('usuario1@example.com', 'SenhaF0rte!', 'João Silva', '1990-05-12'),
+('usuario2@example.com', 'F0rt3@Senha', 'Maria Oliveira', '1985-08-25'),
+('usuario3@example.com', 'M3lh0r#S3nh4', 'Pedro Santos', '2000-02-15');
 
--- Inserindo dados na tabela Treinador
-INSERT INTO Treinador (CPF, Nome, Data_Nascimento, Genero) VALUES
-('11111111111', 'Roberto Costa', '1980-11-05', 'Masculino'),
-('22222222222', 'Mariana Souza', '1985-07-19', 'Feminino'),
-('33333333333', 'Pedro Gonçalves', '1978-03-01', 'Masculino');
+-- Tabela de Moderadores
+INSERT INTO Moderadores (usuario_email) VALUES
+('usuario1@example.com'),
+('usuario2@example.com'),
+('usuario3@example.com');
 
--- Inserindo dados na tabela Árbitro
-INSERT INTO Arbitro (CPF, Nome, Data_Nascimento, Genero) VALUES
-('44444444444', 'Rafael Santos', '1992-02-14', 'Masculino'),
-('55555555555', 'Luciana Almeida', '1988-06-30', 'Feminino'),
-('66666666666', 'Paulo Henrique', '1985-09-18', 'Masculino');
+-- Tabela de Permissões do Moderador
+INSERT INTO Permissoes (moderador, permissao) VALUES
+('usuario1@example.com', 'Gerenciar usuários'),
+('usuario2@example.com', 'Editar torneios'),
+('usuario3@example.com', 'Remover partidas');
 
--- Inserindo dados na tabela Narrador
-INSERT INTO Narrador (CPF, Nome, Data_Nascimento, Genero) VALUES
-('77777777777', 'Ricardo Bastos', '1980-04-10', 'Masculino'),
-('88888888888', 'Carla Mendes', '1990-12-25', 'Feminino'),
-('99999999999', 'Fernanda Ribeiro', '1983-03-12', 'Feminino');
-
--- Inserindo dados na tabela Esporte
-INSERT INTO Esporte (Nome) VALUES
+-- Tabela de Esportes
+INSERT INTO Esportes (nome) VALUES
 ('Futebol'),
 ('Basquete'),
 ('Vôlei');
 
--- Inserindo dados na tabela Usuário
-INSERT INTO Usuario (Email, Senha, Nome, Data_Nascimento) VALUES
-('joao@gmail.com', 'senha123', 'João Santos', '1998-04-18'),
-('ana@hotmail.com', 'senha456', 'Ana Carvalho', '2000-01-10'),
-('carlos@yahoo.com', 'senha789', 'Carlos Souza', '1995-07-22');
+-- Tabela de Locais
+INSERT INTO Locais (nome, rua, numero, estado, cidade, pais, capacidade) VALUES
+('Estádio Nacional', 'Rua Principal', '1234', 'SP', 'São Paulo', 'Brasil', 50000),
+('Ginásio Central', 'Avenida Secundária', '567', 'RJ', 'Rio de Janeiro', 'Brasil', 12000),
+('Arena Olímpica', 'Travessa dos Atletas', '890', 'MG', 'Belo Horizonte', 'Brasil', 30000);
 
--- Inserindo dados na tabela Patrocinador
-INSERT INTO Patrocinador (CNPJ, Nome) VALUES
-('12345678000123', 'Nike'),
-('98765432000198', 'Adidas'),
-('56789012000156', 'Puma');
+-- Tabela de Torneios
+INSERT INTO Torneios (nome, data_inicio, data_fim, esporte_nome) VALUES
+('Copa Nacional', '2023-03-01', '2023-03-30', 'Futebol'),
+('Liga Estadual', '2023-06-15', '2023-07-15', 'Basquete'),
+('Campeonato de Vôlei', '2023-09-01', '2023-09-25', 'Vôlei');
 
--- Inserindo dados na tabela Local
-INSERT INTO Local (Nome, Rua, Numero, Estado, Cidade, País, Capacidade) VALUES
-('Estádio Nacional', 'Avenida Central', 123, 'São Paulo', 'São Paulo', 'Brasil', 50000),
-('Ginásio Olímpico', 'Rua das Palmeiras', 45, 'Rio de Janeiro', 'Rio de Janeiro', 'Brasil', 20000),
-('Arena Esportiva', 'Avenida Atlântica', 678, 'Minas Gerais', 'Belo Horizonte', 'Brasil', 30000);
+-- Tabela de Partidas
+INSERT INTO Partidas (torneio_nome, torneio_data_inicio, local_id, data_hora, resultado) VALUES
+('Copa Nacional', '2023-03-01', 1, '2023-03-10 15:00:00', '2-1'),
+('Liga Estadual', '2023-06-15', 2, '2023-06-20 18:00:00', '89-76'),
+('Campeonato de Vôlei', '2023-09-01', 3, '2023-09-10 20:00:00', '3-0');
 
--- Inserindo dados na tabela Torneio
-INSERT INTO Torneio (Nome, Data_Início, Data_Fim, Esporte_Nome) VALUES
-('Copa Brasil', '2024-03-01', '2024-03-30', 'Futebol'),
-('Campeonato Nacional', '2024-04-01', '2024-04-20', 'Basquete'),
-('Liga de Vôlei', '2024-05-01', '2024-05-15', 'Vôlei');
+-- Tabela de Transmissões
+INSERT INTO Transmissoes (url, data_hora, id_partida) VALUES
+('http://transmissao1.com', '2023-03-10 15:00:00', 1),
+('http://transmissao2.com', '2023-06-20 18:00:00', 2),
+('http://transmissao3.com', '2023-09-10 20:00:00', 3);
 
--- Inserindo dados na tabela Partida
-INSERT INTO Partida (Torneio_Nome, Torneio_Data_Início, Local_ID, Data_Hora, Resultado) VALUES
-('Copa Brasil', '2024-03-01', 1, '2024-03-05 16:00:00', '3x1'),
-('Campeonato Nacional', '2024-04-01', 2, '2024-04-10 18:00:00', '85x78'),
-('Liga de Vôlei', '2024-05-01', 3, '2024-05-12 15:00:00', '2x3');
+-- Tabela Assistido
+INSERT INTO Assistido (usuario_email, transmissao_url, data_hora, tempo_assistido) VALUES
+('usuario1@example.com', 'http://transmissao1.com', '2023-03-10 16:00:00', 45),
+('usuario2@example.com', 'http://transmissao2.com', '2023-06-20 19:00:00', 60),
+('usuario3@example.com', 'http://transmissao3.com', '2023-09-10 21:00:00', 90);
 
--- Inserindo dados na tabela Time
-INSERT INTO Time (Esporte_Nome, Nome, Treinador_CPF) VALUES
-('Futebol', 'Time A', '11111111111'),
-('Basquete', 'Time B', '22222222222'),
-('Vôlei', 'Time C', '33333333333');
+-- Tabela de Jogadores
+INSERT INTO Jogadores (cpf, nome, data_nascimento, genero, altura, peso) VALUES
+('123.456.789-00', 'Carlos Almeida', '1995-04-10', 'M', 1.85, 80.0),
+('987.654.321-00', 'Ana Paula', '1998-12-05', 'F', 1.78, 65.5),
+('456.123.789-00', 'Rafael Lima', '2000-07-20', 'M', 1.92, 90.3);
 
--- Inserindo dados na tabela Joga_Por
-INSERT INTO Joga_Por (Time_Esporte, Time_Nome, Jogador_CPF) VALUES
-('Futebol', 'Time A', '12345678901'),
-('Basquete', 'Time B', '98765432109'),
-('Vôlei', 'Time C', '56789012345');
+-- Tabela de Treinadores
+INSERT INTO Treinadores (cpf, nome, data_nascimento, genero) VALUES
+('147.258.369-00', 'Luiz Fernando', '1978-03-22', 'M'),
+('963.852.741-00', 'Roberta Mendes', '1982-11-17', 'F'),
+('321.654.987-00', 'Cláudio Rocha', '1975-06-15', 'M');
 
--- Inserindo dados na tabela Moderador
-INSERT INTO Moderador (Usuário_Email) VALUES
-('joao@gmail.com'),
-('ana@hotmail.com'),
-('carlos@yahoo.com');
+-- Tabela de Árbitros
+INSERT INTO Arbitros (cpf, nome, data_nascimento, genero) VALUES
+('753.159.456-00', 'Eduardo Souza', '1980-01-10', 'M'),
+('852.951.357-00', 'Joana Silva', '1985-09-05', 'F'),
+('159.753.852-00', 'Ricardo Moura', '1979-12-20', 'M');
 
--- Inserindo dados na tabela Permissões
-INSERT INTO Permissoes (Moderador_Usuário, Permissao) VALUES
-('joao@gmail.com', 'Editar'),
-('ana@hotmail.com', 'Excluir'),
-('carlos@yahoo.com', 'Criar');
+-- Tabela de Narradores
+INSERT INTO Narradores (cpf, nome, data_nascimento, genero) VALUES
+('741.852.963-00', 'Gabriel Costa', '1988-03-15', 'M'),
+('369.258.147-00', 'Sofia Ribeiro', '1992-07-30', 'F'),
+('258.147.369-00', 'Lucas Pereira', '1990-10-25', 'M');
 
--- Inserindo dados na tabela Transmissão
-INSERT INTO Transmissao (URL, Data_Hora, Partida_ID) VALUES
-('https://example.com/partida1', '2024-03-05 16:00:00', 1),
-('https://example.com/partida2', '2024-04-10 18:00:00', 2),
-('https://example.com/partida3', '2024-05-12 15:00:00', 3);
+-- Tabela de Times
+INSERT INTO Times (nome, nome_esporte, cpf_treinador) VALUES
+('Tigres', 'Futebol', '147.258.369-00'),
+('Águias', 'Basquete', '963.852.741-00'),
+('Pumas', 'Vôlei', '321.654.987-00');
 
--- Inserindo dados na tabela Assistido
-INSERT INTO Assistido (Usuário_Email, Transmissão_URL, Data_Hora, Tempo_Assistido) VALUES
-('joao@gmail.com', 'https://example.com/partida1', '2024-03-05 16:30:00', '00:30:00'),
-('ana@hotmail.com', 'https://example.com/partida2', '2024-04-10 18:15:00', '00:45:00'),
-('carlos@yahoo.com', 'https://example.com/partida3', '2024-05-12 15:20:00', '00:40:00');
+-- Tabela de Patrocinadores
+INSERT INTO Patrocinadores (cnpj, nome) VALUES
+('12.345.678/0001-00', 'Empresa A'),
+('98.765.432/0001-99', 'Empresa B'),
+('56.789.012/0001-88', 'Empresa C');
 
--- Inserindo dados na tabela Comenta
-INSERT INTO Comenta (Transmissão_URL, Narrador_CPF) VALUES
-('https://example.com/partida1', '77777777777'),
-('https://example.com/partida2', '88888888888'),
-('https://example.com/partida3', '99999999999');
+-- Tabela Investe
+INSERT INTO Investe (patrocinador_cnpj, torneio_nome, torneio_data_inicio, valor_investido) VALUES
+('12.345.678/0001-00', 'Copa Nacional', '2023-03-01', 100000.00),
+('98.765.432/0001-99', 'Liga Estadual', '2023-06-15', 75000.00),
+('56.789.012/0001-88', 'Campeonato de Vôlei', '2023-09-01', 50000.00);
 
--- Inserindo dados na tabela Investe
-INSERT INTO Investe (Patrocinador_CNPJ, Torneio_Nome, Torneio_Data_Início, Valor_Investido) VALUES
-('12345678000123', 'Copa Brasil', '2024-03-01', 500000.00),
-('98765432000198', 'Campeonato Nacional', '2024-04-01', 300000.00),
-('56789012000156', 'Liga de Vôlei', '2024-05-01', 200000.00);
+-- Tabela Joga
+INSERT INTO Joga (partida_id, time_nome, time_esporte) VALUES
+(1, 'Tigres', 'Futebol'),
+(2, 'Águias', 'Basquete'),
+(3, 'Pumas', 'Vôlei');
 
--- Inserindo dados na tabela Apita
-INSERT INTO Apita (Partida_ID, Árbitro_CPF) VALUES
-(1, '44444444444'),
-(2, '55555555555'),
-(3, '66666666666');
+-- Tabela Joga_Por
+INSERT INTO Joga_Por (time_nome, time_esporte, jogador_cpf) VALUES
+('Tigres', 'Futebol', '123.456.789-00'),
+('Águias', 'Basquete', '987.654.321-00'),
+('Pumas', 'Vôlei', '456.123.789-00');
 
--- Inserindo dados na tabela Joga
-INSERT INTO Joga (Partida_ID, Time_Esporte, Time_Nome) VALUES
-(1, 'Futebol', 'Time A'),
-(2, 'Basquete', 'Time B'),
-(3, 'Vôlei', 'Time C');
+-- Tabela Apita
+INSERT INTO Apita (partida_id, arbitro_cpf) VALUES
+(1, '753.159.456-00'),
+(2, '852.951.357-00'),
+(3, '159.753.852-00');
+
+-- Tabela Comenta
+INSERT INTO Comenta (transmissao_url, narrador_cpf) VALUES
+('http://transmissao1.com', '741.852.963-00'),
+('http://transmissao2.com', '369.258.147-00'),
+('http://transmissao3.com', '258.147.369-00');
