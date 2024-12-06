@@ -3,6 +3,7 @@ import os
 from psycopg2 import sql
 from datetime import datetime
 import re  # Biblioteca para expressões regulares
+import colorful as cf # Biblioteca que imprime texto com cores
 
 # Função para conectar ao banco usando variáveis de ambiente
 def connect_db():
@@ -92,7 +93,7 @@ def cadastrar_jogador():
 
         print("Jogador cadastrado com sucesso!")
     except psycopg2.Error as e:
-        print(f"Erro ao cadastrar jogador no banco: {e}")
+        print(cf.red("Erro ao cadastrar jogador no banco: ") + cf.bold_red(f"{e}"))
     except Exception as e:
         print(f"Erro inesperado: {e}")
 
@@ -116,7 +117,8 @@ def consultar_jogador():
                 jogador = cur.fetchone()
 
         if jogador:
-            print("\n--- Dados do Jogador ---")
+            print(cf.bold_green("\nJogador Encontrado!\n"))
+            print(cf.yellow("--- Dados do Jogador ---"))
             print(f"CPF: {jogador[0]}")
             print(f"Nome: {jogador[1]}")
             print(f"Data de Nascimento: {jogador[2]}")
@@ -124,7 +126,7 @@ def consultar_jogador():
             print(f"Altura: {jogador[4]} m")
             print(f"Peso: {jogador[5]} kg")
         else:
-            print("Jogador não encontrado.")
+            print(cf.bold_red("\nJogador não encontrado."))
     except psycopg2.Error as e:
         print(f"Erro ao consultar jogador no banco: {e}")
     except Exception as e:
@@ -133,10 +135,10 @@ def consultar_jogador():
 # Menu principal
 def menu():
     while True:
-        print("\nSistema de Gerenciamento de Dados")
-        print("1. Cadastrar Jogador")
-        print("2. Consultar Jogador")
-        print("3. Sair")
+        print(cf.bold_yellow("\nSistema de Gerenciamento e Transmissão de Torneios Amadores"))
+        print(cf.bold("1.") + " Cadastrar Jogador")
+        print(cf.bold("2.") + " Consultar Jogador")
+        print(cf.bold("3.") + " Sair\n")
 
         opcao = input("Escolha uma opção: ").strip()
         if opcao == "1":
@@ -144,10 +146,10 @@ def menu():
         elif opcao == "2":
             consultar_jogador()
         elif opcao == "3":
-            print("Saindo...")
+            print(cf.bold("Saindo..."))
             break
         else:
-            print("Opção inválida! Tente novamente.")
+            print(cf.bold("Opção inválida! Tente novamente."))
 
 # Executa o sistema
 if __name__ == "__main__":

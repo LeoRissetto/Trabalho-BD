@@ -56,7 +56,14 @@ INSERT INTO Assistido (usuario_email, transmissao_url, data_hora, tempo_assistid
 INSERT INTO Jogadores (cpf, nome, data_nascimento, genero, altura, peso) VALUES
 ('123.456.789-00', 'Carlos Almeida', '1995-04-10', 'M', 1.85, 80.0),
 ('987.654.321-00', 'Ana Paula', '1998-12-05', 'F', 1.78, 65.5),
-('456.123.789-00', 'Rafael Lima', '2000-07-20', 'M', 1.92, 90.3);
+('456.123.789-00', 'Rafael Lima', '2000-07-20', 'M', 1.92, 90.3),
+('467.145.678-80', 'Marco Antonio Gaspar Garcia', '2002-08-29', 'M', 1.82, 85.0),
+('131.098.089-60', 'Leonardo Gueno Rissetto', '2004-08-12', 'M', 1.72, 70.4),
+('420.333.777-69', 'Luciano Hang', '2001-09-07', 'M', 1.42, 240.0),
+('487.011.638-33', 'Thiago Kashivagui Gonçalves', '2004-02-28', 'M', 1.68, 70.0),
+('125.905.146-38', 'Lucas Lima Romero', '2004-02-17', 'M', 1.72, 65.0),
+('172.217.221-72', 'Perseu Cazarim', '1990-01-17', 'M', 1.75, 90.0),
+('486.977.498-40', 'Rauany Martinez Secci', '2003-01-25', 'F', 1.52, 57.0);
 
 -- Tabela de Treinadores
 INSERT INTO Treinadores (cpf, nome, data_nascimento, genero) VALUES
@@ -72,9 +79,14 @@ INSERT INTO Arbitros (cpf, nome, data_nascimento, genero) VALUES
 
 -- Tabela de Narradores
 INSERT INTO Narradores (cpf, nome, data_nascimento, genero) VALUES
-('741.852.963-00', 'Gabriel Costa', '1988-03-15', 'M'),
-('369.258.147-00', 'Sofia Ribeiro', '1992-07-30', 'F'),
-('258.147.369-00', 'Lucas Pereira', '1990-10-25', 'M');
+('001.002.003-04', 'Pedro Ernesto Denardim', '1920-01-01', 'M'),
+('111.222.333.90', 'Cléber Machado', '1995-11-29', 'M'),
+('741.742.743.74', 'Luiz Carlos Junior', '1978-12-01', 'M'),
+('432.432.987.21', 'Silvio Luiz', '1900-03-27', 'M'),
+('321.321.321.32', 'Milton leite', '1980-02-10', 'M'),
+('741.852.963-00', 'André Henning', '1988-03-15', 'M'),
+('369.258.147-00', 'Jorge Iggor', '1992-07-30', 'M'),
+('258.147.369-00', 'Galvão Bueno', '1990-10-25', 'M');
 
 -- Tabela de Times
 INSERT INTO Times (nome, nome_esporte, cpf_treinador) VALUES
@@ -84,9 +96,18 @@ INSERT INTO Times (nome, nome_esporte, cpf_treinador) VALUES
 
 -- Tabela de Patrocinadores
 INSERT INTO Patrocinadores (cnpj, nome) VALUES
-('12.345.678/0001-00', 'Empresa A'),
-('98.765.432/0001-99', 'Empresa B'),
-('56.789.012/0001-88', 'Empresa C');
+('12.345.678/0001-00', 'Starbene'),
+('98.765.432/0001-99', 'Embratel'),
+('11.222.333/0001-11', 'SAEComp'),
+('22.333.444/0001-22', 'Corote'),
+('33.444.555/0001-33', 'Takus Sports Bar'),
+('44.555.666/0001-44', 'KFC Brasil'),
+('55.666.777/0001-55', 'Grupo SEMEAR'),
+('66.777.888/0001-66', 'Essenza'),
+('77.888.999/0001-77', 'BlackShield Technologies'),
+('88.999.000/0001-88', 'Supercell'),
+('99.000.111/0001-99', 'Jornadas USP'),
+('56.789.012/0001-88', 'Betano');
 
 -- Tabela Investe
 INSERT INTO Investe (patrocinador_cnpj, torneio_nome, torneio_data_inicio, valor_investido) VALUES
