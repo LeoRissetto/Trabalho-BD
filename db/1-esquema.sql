@@ -143,7 +143,7 @@ CREATE TABLE Jogadores (
     data_nascimento DATE NOT NULL,
     genero CHAR(1) NOT NULL,
     altura DECIMAL(3,2) NOT NULL,
-    peso DECIMAL(3,1) NOT NULL,
+    peso DECIMAL(4,1) NOT NULL,
 
     -- Constraints de Jogadores
     CONSTRAINT pk_jogadores PRIMARY KEY (cpf),
@@ -287,3 +287,4 @@ CREATE TABLE Comenta (
 );
 
 -- 
+SELECT * FROM Jogadores;

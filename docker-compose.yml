@@ -13,6 +13,7 @@ services:
       - trabalho_bd_data:/var/lib/postgresql/data
       - ./db/1-esquema.sql:/docker-entrypoint-initdb.d/1-esquema.sql
       - ./db/2-dados.sql:/docker-entrypoint-initdb.d/2-dados.sql
+    # command: bash -c "psql -U postgres -d postgres -f /docker-entrypoint-initdb.d/1-esquema.sql && psql -U postgres -d postgres -f /docker-entrypoint-initdb.d/2-dados.sql && docker-entrypoint.sh postgres"
     networks:
       - app_network
 
