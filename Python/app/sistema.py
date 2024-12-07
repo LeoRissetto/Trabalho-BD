@@ -42,6 +42,17 @@ def validar_data(data):
 def validar_genero(genero):
     return genero.upper() in ["M", "F"]  # M: Masculino, F: Feminino
 
+def validar_altura(altura):
+    if altura <= 0 or altura >= 10:
+        return False, altura
+    return True, round(altura, 2)
+
+def validar_peso(peso):
+    if peso <=0 or peso >= 1000:
+        return False, peso
+    return True, round(peso, 1)
+
+
 # -------------------------------------------------------------------------- #
 
 # Função para cadastrar jogador, chamada pelo menu principal
@@ -83,21 +94,23 @@ def cadastrar_jogador(conn):
         while True:
             try:
                 altura = float(input(cf.bold("Altura do Jogador (em metros, ex: 1.80): ")).strip())
-                if altura > 0:
+                ret, altura = validar_altura(altura)
+                if ret:
                     break
             except ValueError:
                 pass
-            print(cf.red("Altura inválida! Insira um número positivo."))
+            print(cf.red("Altura inválida! Tente novamente."))
 
         # Peso
         while True:
             try:
                 peso = float(input(cf.bold("Peso do Jogador (em kg, ex: 70.5): ")).strip())
-                if peso > 0:
+                ret, peso = validar_peso(peso)
+                if ret:
                     break
             except ValueError:
                 pass
-            print(cf.red("Peso inválido! Insira um número positivo."))
+            print(cf.red("Peso inválido! Tente novamente."))
 
         # Depois de validados, podemos inserir no BD
 
@@ -129,7 +142,7 @@ def consultar_jogador(conn):
         cpf = input("Informe o CPF do jogador que deseja consultar: ").strip()
         ret, cpf = validar_cpf(cpf)
         if not ret:
-            print("CPF inválido! Tente novamente.")
+            print(cf.red("CPF inválido! Tente novamente."))
             return
 
         # Realiza a consulta
@@ -195,6 +208,7 @@ def menu():
             else:
                 print(cf.bold("Opção inválida! Tente novamente."))
 
+    # Caso o usuário saia com Ctrl+C, exibir uma saída mais elegante
     except KeyboardInterrupt as e:
         print(cf.bold("\n\nSaindo..."))
 
