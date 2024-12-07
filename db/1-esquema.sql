@@ -77,7 +77,7 @@ CREATE TABLE Locais (
 CREATE TABLE Torneios (
 
     -- Atributos
-    nome VARCHAR(30) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
     data_inicio DATE NOT NULL,
     data_fim DATE NOT NULL,
     esporte_nome VARCHAR(15) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE Partidas (
 
     -- Atributos
     id SERIAL NOT NULL,
-    torneio_nome VARCHAR(30) NOT NULL,
+    torneio_nome VARCHAR(50) NOT NULL,
     torneio_data_inicio DATE NOT NULL,
     local_id INT NOT NULL,
     data_hora DATE NOT NULL,
@@ -222,7 +222,7 @@ CREATE TABLE Investe (
 
     -- Atributos
     patrocinador_cnpj CHAR(18) NOT NULL,
-    torneio_nome VARCHAR(30) NOT NULL,
+    torneio_nome VARCHAR(50) NOT NULL,
     torneio_data_inicio DATE NOT NULL,
     valor_investido DECIMAL(10, 2) NOT NULL,
 
