@@ -19,23 +19,22 @@ ORDER BY
     t.nome ASC, t.data_inicio DESC;
 
 
--- 2. Jogadores que participaram de partidas no local "ESTÁDIO NACIONAL"
-SELECT DISTINCT 
-    J.CPF, 
-    J.Nome, 
-    L.Nome AS Local
+-- 2. Lista de árbitros com número de partidas apitadas e a última partida apitada
+SELECT 
+    ar.cpf AS arbitro_cpf,
+    ar.nome AS arbitro_nome,
+    COALESCE(COUNT(a.arbitro_cpf), 0) AS num_partidas_apitadas,
+    COALESCE(MAX(p.data_hora)::text, 'Sem partidas') AS ultima_partida_apitada
 FROM 
-    Jogadores J
-JOIN 
-    Joga_Por JP ON J.CPF = JP.Jogador_CPF
-JOIN 
-    Joga JO ON JP.Time_Esporte = JO.Time_Esporte AND JP.Time_Nome = JO.Time_Nome
-JOIN 
-    Partidas P ON JO.Partida_ID = P.ID
-JOIN 
-    Locais L ON P.Local_ID = L.ID
-WHERE 
-    L.Nome = 'ESTÁDIO NACIONAL';
+    Arbitros ar
+LEFT OUTER JOIN Apita a
+    ON ar.cpf = a.arbitro_cpf
+LEFT OUTER JOIN Partidas p
+    ON a.partida_id = p.id
+GROUP BY 
+    ar.cpf, ar.nome
+ORDER BY 
+    num_partidas_apitadas DESC, ar.nome ASC;
 
 -- 3. Média de idade dos jogadores por esporte
 SELECT 
