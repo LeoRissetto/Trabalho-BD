@@ -1,4 +1,4 @@
--- 1. Mostrar todos os torneios e, caso houver, os patrocinadores que investiram neles
+-- 1. Mostrar todos os torneios e, caso haja, os patrocinadores que investiram neles
 SELECT 
     t.nome AS torneio_nome,
     t.data_inicio AS inicio_torneio,
@@ -11,7 +11,7 @@ LEFT OUTER JOIN
 ORDER BY 
     t.nome, t.data_inicio;
 
--- 2. Jogadores que participaram de partidas no local "Estádio Nacional"
+-- 2. Jogadores que participaram de partidas no local "ESTÁDIO NACIONAL"
 SELECT DISTINCT 
     J.CPF, 
     J.Nome, 
@@ -27,7 +27,7 @@ JOIN
 JOIN 
     Locais L ON P.Local_ID = L.ID
 WHERE 
-    L.Nome = 'Estádio Nacional';
+    L.Nome = 'ESTÁDIO NACIONAL';
 
 -- 3. Média de idade dos jogadores por esporte
 SELECT 
@@ -44,7 +44,7 @@ GROUP BY
 ORDER BY 
     Media_Idade;
 
--- 4. Locais que receberam mais partidas no torneio "Copa Nacional"
+-- 4. Locais que receberam mais partidas no torneio "COPA NACIONAL"
 SELECT 
     L.Nome AS Local, 
     L.Cidade, 
@@ -55,7 +55,7 @@ FROM
 JOIN 
     Partidas P ON L.ID = P.Local_ID
 WHERE 
-    P.Torneio_Nome = 'Copa Nacional'
+    P.Torneio_Nome = 'COPA NACIONAL'
     AND P.Torneio_Data_Inicio = '2023-03-01'
 GROUP BY 
     L.ID, 
@@ -65,7 +65,7 @@ GROUP BY
 ORDER BY 
     Total_Partidas DESC;
 
--- 5. Patrocinadores que investiram em todos os torneios de "Basquete"
+-- 5. Patrocinadores que investiram em todos os torneios de "BASQUETE"
 SELECT 
     P.CNPJ, 
     P.Nome
@@ -76,7 +76,7 @@ JOIN
 JOIN 
     Torneios T ON I.Torneio_Nome = T.Nome AND I.Torneio_Data_Inicio = T.Data_Inicio
 WHERE 
-    T.Esporte_Nome = 'Basquete'
+    T.Esporte_Nome = 'BASQUETE'
 GROUP BY 
     P.CNPJ, 
     P.Nome
@@ -84,5 +84,5 @@ HAVING
     COUNT(*) = (
         SELECT COUNT(*)
         FROM Torneios
-        WHERE Esporte_Nome = 'Basquete'
+        WHERE Esporte_Nome = 'BASQUETE'
     );
