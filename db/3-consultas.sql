@@ -1,22 +1,4 @@
--- 1. Jogadores que participaram de partidas no local "Estádio Nacional"
-SELECT DISTINCT 
-    J.CPF, 
-    J.Nome, 
-    L.Nome AS Local
-FROM 
-    Jogador J
-JOIN 
-    Joga_Por JP ON J.CPF = JP.Jogador_CPF
-JOIN 
-    Joga JO ON JP.Time_Esporte = JO.Time_Esporte AND JP.Time_Nome = JO.Time_Nome
-JOIN 
-    Partida P ON JO.Partida_ID = P.ID
-JOIN 
-    Local L ON P.Local_ID = L.ID
-WHERE 
-    L.Nome = 'Estádio Nacional';
-
--- 2. Mostrar todos os torneios e, caso houver, os patrocinadores que investiram neles
+-- 1. Mostrar todos os torneios e, caso houver, os patrocinadores que investiram neles
 SELECT 
     t.nome AS torneio_nome,
     t.data_inicio AS inicio_torneio,
@@ -28,6 +10,24 @@ LEFT OUTER JOIN
     Investe i ON t.nome = i.torneio_nome AND t.data_inicio = i.torneio_data_inicio
 ORDER BY 
     t.nome, t.data_inicio;
+
+-- 2. Jogadores que participaram de partidas no local "Estádio Nacional"
+SELECT DISTINCT 
+    J.CPF, 
+    J.Nome, 
+    L.Nome AS Local
+FROM 
+    Jogadores J
+JOIN 
+    Joga_Por JP ON J.CPF = JP.Jogador_CPF
+JOIN 
+    Joga JO ON JP.Time_Esporte = JO.Time_Esporte AND JP.Time_Nome = JO.Time_Nome
+JOIN 
+    Partidas P ON JO.Partida_ID = P.ID
+JOIN 
+    Locais L ON P.Local_ID = L.ID
+WHERE 
+    L.Nome = 'Estádio Nacional';
 
 -- 3. Média de idade dos jogadores por esporte
 SELECT 
