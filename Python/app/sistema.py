@@ -28,7 +28,7 @@ def validar_cpf(cpf):
     Deixa o cpf somente com alfanuméricos e verifica se tem 11 caracteres.
     """
     cpf = re.sub(r"[^\w]", "", cpf)
-    if len(cpf) == 11 and cpf.isalnum():
+    if len(cpf) == 11 and cpf.isdigit():
         return True, cpf
     return False, cpf
 
@@ -183,6 +183,8 @@ def consultar_jogador(conn):
 
 # Menu principal
 def menu():
+
+    conn = None
 
     # Coneta com o BD, e oferece as opções para o usuário
     try:

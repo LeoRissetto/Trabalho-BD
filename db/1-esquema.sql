@@ -60,7 +60,7 @@ CREATE TABLE Locais (
 
     -- Atributos
     id SERIAL NOT NULL,
-    nome VARCHAR(30) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
     rua VARCHAR(30) NOT NULL,
     numero VARCHAR(6) NOT NULL,
     estado CHAR(2) NOT NULL,
