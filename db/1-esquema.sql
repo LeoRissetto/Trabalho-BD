@@ -138,7 +138,7 @@ CREATE TABLE Assistido (
 CREATE TABLE Jogadores (
 
     -- Atributos
-    cpf CHAR(14) NOT NULL,
+    cpf CHAR(11) NOT NULL,
     nome VARCHAR(50) NOT NULL,
     data_nascimento DATE NOT NULL,
     genero CHAR(1) NOT NULL,
@@ -146,6 +146,7 @@ CREATE TABLE Jogadores (
     peso DECIMAL(4,1) NOT NULL,
 
     -- Constraints de Jogadores
+    CONSTRAINT ck_cpf CHECK (cpf ~ '^\d{11}$'),
     CONSTRAINT pk_jogadores PRIMARY KEY (cpf),
     CONSTRAINT ck_jogadores CHECK (genero in ('M', 'F'))
 );
@@ -154,12 +155,13 @@ CREATE TABLE Jogadores (
 CREATE TABLE Treinadores (
 
     -- Atributos
-    cpf CHAR(14) NOT NULL,
+    cpf CHAR(11) NOT NULL,
     nome VARCHAR(50) NOT NULL,
     data_nascimento DATE NOT NULL,
     genero CHAR(1) NOT NULL,
 
     -- Constraints de Treinadores
+    CONSTRAINT ck_cpf CHECK (cpf ~ '^\d{11}$'),
     CONSTRAINT pk_treinadores PRIMARY KEY (cpf),
     CONSTRAINT ck_treinadores CHECK (genero in ('M', 'F'))
 );
@@ -168,12 +170,13 @@ CREATE TABLE Treinadores (
 CREATE TABLE Arbitros (
 
     -- Atributos
-    cpf CHAR(14) NOT NULL,
+    cpf CHAR(11) NOT NULL,
     nome VARCHAR(50) NOT NULL,
     data_nascimento DATE NOT NULL,
     genero CHAR(1) NOT NULL,
 
     -- Constraints de Arbitros
+    CONSTRAINT ck_cpf CHECK (cpf ~ '^\d{11}$'),
     CONSTRAINT pk_arbitros PRIMARY KEY (cpf),
     CONSTRAINT ck_arbitros CHECK (genero in ('M', 'F'))
 );
@@ -182,12 +185,13 @@ CREATE TABLE Arbitros (
 CREATE TABLE Narradores (
 
     -- Atributos
-    cpf CHAR(14) NOT NULL,
+    cpf CHAR(11) NOT NULL,
     nome VARCHAR(50) NOT NULL,
     data_nascimento DATE NOT NULL,
     genero CHAR(1) NOT NULL,
 
     -- Constraints de Narradores
+    CONSTRAINT ck_cpf CHECK (cpf ~ '^\d{11}$'),
     CONSTRAINT pk_narradores PRIMARY KEY (cpf),
     CONSTRAINT ck_narradores CHECK (genero in ('M', 'F'))
 );
@@ -198,7 +202,7 @@ CREATE TABLE Times (
     -- Atributos
     nome VARCHAR(30) NOT NULL,
     nome_esporte VARCHAR(15) NOT NULL,
-    cpf_treinador CHAR(14) NOT NULL,
+    cpf_treinador CHAR(11) NOT NULL,
 
     -- Constraints
     CONSTRAINT pk_times PRIMARY KEY (nome, nome_esporte),
@@ -210,10 +214,11 @@ CREATE TABLE Times (
 CREATE TABLE Patrocinadores (
 
     -- Atributos
-    cnpj CHAR(18) NOT NULL,
+    cnpj CHAR(14) NOT NULL,
     nome VARCHAR(30) NOT NULL,
 
     -- Constarints de Patrocinadores
+    CONSTRAINT ck_cnpj CHECK (cnpj ~ '^\d{14}$'),
     CONSTRAINT pk_patrocinadores PRIMARY KEY (cnpj)
 );
 
@@ -221,12 +226,13 @@ CREATE TABLE Patrocinadores (
 CREATE TABLE Investe (
 
     -- Atributos
-    patrocinador_cnpj CHAR(18) NOT NULL,
+    patrocinador_cnpj CHAR(14) NOT NULL,
     torneio_nome VARCHAR(50) NOT NULL,
     torneio_data_inicio DATE NOT NULL,
     valor_investido DECIMAL(10, 2) NOT NULL,
 
     -- Constraints de Investe
+    CONSTRAINT ck_cnpj CHECK (cnpj ~ '^\d{14}$'),
     CONSTRAINT pk_investe PRIMARY KEY (patrocinador_cnpj, torneio_nome, torneio_data_inicio),
     CONSTRAINT fk_investe_1 FOREIGN KEY (patrocinador_cnpj) REFERENCES Patrocinadores(cnpj) ON DELETE CASCADE,
     CONSTRAINT fk_investe_2 FOREIGN KEY (torneio_nome, torneio_data_inicio) REFERENCES Torneios(nome, data_inicio) ON DELETE CASCADE
@@ -252,7 +258,7 @@ CREATE TABLE Joga_Por (
     -- Atributos
     time_nome VARCHAR(30) NOT NULL,
     time_esporte VARCHAR(15) NOT NULL,
-    jogador_cpf CHAR(14) NOT NULL,
+    jogador_cpf CHAR(11) NOT NULL,
 
     -- Constraints de Joga
     CONSTRAINT pk_jogapor PRIMARY KEY (time_nome, time_esporte, jogador_cpf),
@@ -265,7 +271,7 @@ CREATE TABLE Apita (
 
     -- Atributos
     partida_id INT NOT NULL,
-    arbitro_cpf CHAR(14) NOT NULL,
+    arbitro_cpf CHAR(11) NOT NULL,
 
     -- Constraints de Joga
     CONSTRAINT pk_apita PRIMARY KEY (partida_id, arbitro_cpf),
@@ -278,7 +284,7 @@ CREATE TABLE Comenta (
 
     -- Atributos
     transmissao_url VARCHAR(100) NOT NULL,
-    narrador_cpf CHAR(14) NOT NULL,
+    narrador_cpf CHAR(11) NOT NULL,
 
     -- Constraints de Joga
     CONSTRAINT pk_comenta PRIMARY KEY (transmissao_url, narrador_cpf),
