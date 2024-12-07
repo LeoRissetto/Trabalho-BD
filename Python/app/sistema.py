@@ -25,11 +25,12 @@ def connect_db():
 # Funções para validação de entrada de dados, retornam falso se a entrada fornecida não estiver no formato especificado
 def validar_cpf(cpf):
     """
-    Valida se o CPF está no formato correto (XXX.XXX.XXX-XX) e tem 14 caracteres.
+    Deixa o cpf somente com alfanuméricos e verifica se tem 11 caracteres.
     """
-    if re.match(r"^\d{3}\.\d{3}\.\d{3}-\d{2}$", cpf):
-        return True
-    return False
+    cpf = re.sub(r"[^\w]", "", cpf)
+    if len(cpf) == 11 and cpf.isalnum():
+        return True, cpf
+    return False, cpf
 
 def validar_data(data):
     try:
@@ -52,10 +53,11 @@ def cadastrar_jogador(conn):
 
         # CPF
         while True:
-            cpf = input(cf.bold("CPF do Jogador formato XXX.XXX.XXX-XX): ")).strip()
-            if validar_cpf(cpf):
+            cpf = input(cf.bold("CPF do Jogador (somente números): ")).strip()
+            ret, cpf = validar_cpf(cpf)
+            if ret:
                 break
-            print(cf.red("CPF inválido! Use o formato XXX.XXX.XXX-XX."))
+            print(cf.red("CPF inválido! Tente novamente."))
 
         # Nome
         nome = input(cf.bold("Nome do Jogador: ")).strip().upper()
@@ -124,9 +126,10 @@ def consultar_jogador(conn):
 
     # Consulta por CPF
     try:
-        cpf = input("Informe o CPF do jogador que deseja consultar (formato XXX.XXX.XXX-XX): ").strip()
-        if not validar_cpf(cpf):
-            print("CPF inválido! Use o formato XXX.XXX.XXX-XX.")
+        cpf = input("Informe o CPF do jogador que deseja consultar: ").strip()
+        ret, cpf = validar_cpf(cpf)
+        if not ret:
+            print("CPF inválido! Tente novamente.")
             return
 
         # Realiza a consulta
@@ -142,13 +145,14 @@ def consultar_jogador(conn):
         # Se encontrou jogador, vamos exibir seus dados
         if jogador:
             
-            # Formatando a saída
+            # Formatando a saída, para melhor exibição para o usuário
+            cpf = f"{jogador[0][:3]}.{jogador[0][3:6]}.{jogador[0][6:9]}-{jogador[0][9:11]}"
             nome = jogador[1].title()
             data_nascimento = datetime.strptime(str(jogador[2]), "%Y-%m-%d").strftime("%d-%m-%Y")
 
             print(cf.bold_green("\nJogador Encontrado!\n"))
             print(cf.yellow("--- Dados do Jogador ---"))
-            print(cf.bold("CPF: ") + f"{jogador[0]}")
+            print(cf.bold("CPF: ") + f"{cpf}")
             print(cf.bold("Nome: ") + f"{nome}")
             print(cf.bold("Data de Nascimento: ") + f"{data_nascimento}")
             print(cf.bold("Gênero: ") + f"{jogador[3]}")

@@ -232,7 +232,7 @@ CREATE TABLE Investe (
     valor_investido DECIMAL(10, 2) NOT NULL,
 
     -- Constraints de Investe
-    CONSTRAINT ck_cnpj CHECK (cnpj ~ '^\d{14}$'),
+    CONSTRAINT ck_cnpj CHECK (patrocinador_cnpj ~ '^\d{14}$'),
     CONSTRAINT pk_investe PRIMARY KEY (patrocinador_cnpj, torneio_nome, torneio_data_inicio),
     CONSTRAINT fk_investe_1 FOREIGN KEY (patrocinador_cnpj) REFERENCES Patrocinadores(cnpj) ON DELETE CASCADE,
     CONSTRAINT fk_investe_2 FOREIGN KEY (torneio_nome, torneio_data_inicio) REFERENCES Torneios(nome, data_inicio) ON DELETE CASCADE
@@ -293,4 +293,3 @@ CREATE TABLE Comenta (
 );
 
 -- 
-SELECT * FROM Jogadores;
