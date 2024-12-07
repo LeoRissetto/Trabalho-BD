@@ -63,13 +63,15 @@ INSERT INTO Jogadores (cpf, nome, data_nascimento, genero, altura, peso) VALUES
 ('487.011.638-33', 'Thiago Kashivagui Gonçalves', '2004-02-28', 'M', 1.68, 70.0),
 ('125.905.146-38', 'Lucas Lima Romero', '2004-02-17', 'M', 1.72, 65.0),
 ('172.217.221-72', 'Perseu Cazarim', '1990-01-17', 'M', 1.75, 90.0),
-('486.977.498-40', 'Rauany Martinez Secci', '2003-01-25', 'F', 1.52, 57.0);
+('486.977.498-40', 'Rauany Martinez Secci', '2003-01-25', 'F', 1.52, 57.0),
+('422.623.858-31', 'Giovanni dos Santos', '2003-11-18', 'M', 1.95, 87.0);
 
 -- Tabela de Treinadores
 INSERT INTO Treinadores (cpf, nome, data_nascimento, genero) VALUES
-('147.258.369-00', 'Luiz Fernando', '1978-03-22', 'M'),
+('147.258.369-00', 'Luiz Fernando', TO_DATE('1978-03-22', 'YYYY-MM-DD'), 'M'),
 ('963.852.741-00', 'Roberta Mendes', '1982-11-17', 'F'),
-('321.654.987-00', 'Cláudio Rocha', '1975-06-15', 'M');
+('321.654.987-00', 'Cláudio Rocha', '1975-06-15', 'M'),
+('221.722.172.21', 'Kazara DJ', '1975-06-20', 'M');
 
 -- Tabela de Árbitros
 INSERT INTO Arbitros (cpf, nome, data_nascimento, genero) VALUES
