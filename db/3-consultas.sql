@@ -27,36 +27,36 @@ FROM
 LEFT OUTER JOIN 
     Investe i ON t.nome = i.torneio_nome AND t.data_inicio = i.torneio_data_inicio
 ORDER BY 
-    t.nome;
+    t.nome, t.data_inicio;
 
 -- 3. Média de idade dos jogadores por esporte
 SELECT 
-    T.Esporte_Nome, 
+    T.nome_esporte, 
     AVG(EXTRACT(YEAR FROM AGE(J.Data_Nascimento))) AS Media_Idade
 FROM 
-    Jogador J
+    Jogadores J
 JOIN 
     Joga_Por JP ON J.CPF = JP.Jogador_CPF
 JOIN 
-    Time T ON JP.Time_Esporte = T.Esporte_Nome AND JP.Time_Nome = T.Nome
+    Times T ON JP.Time_Esporte = T.nome_esporte AND JP.Time_Nome = T.Nome
 GROUP BY 
-    T.Esporte_Nome
+    T.nome_esporte
 ORDER BY 
     Media_Idade;
 
--- 4. Locais que receberam mais partidas no torneio "Copa Brasil"
+-- 4. Locais que receberam mais partidas no torneio "Copa Nacional"
 SELECT 
     L.Nome AS Local, 
     L.Cidade, 
     L.Estado, 
     COUNT(P.ID) AS Total_Partidas
 FROM 
-    Local L
+    Locais L
 JOIN 
-    Partida P ON L.ID = P.Local_ID
+    Partidas P ON L.ID = P.Local_ID
 WHERE 
-    P.Torneio_Nome = 'Copa Brasil'
-    AND P.Torneio_Data_Início = '2024-03-01' -- Data de início do torneio
+    P.Torneio_Nome = 'Copa Nacional'
+    AND P.Torneio_Data_Inicio = '2023-03-01'
 GROUP BY 
     L.ID, 
     L.Nome, 
@@ -70,11 +70,11 @@ SELECT
     P.CNPJ, 
     P.Nome
 FROM 
-    Patrocinador P
+    Patrocinadores P
 JOIN 
     Investe I ON P.CNPJ = I.Patrocinador_CNPJ
 JOIN 
-    Torneio T ON I.Torneio_Nome = T.Nome AND I.Torneio_Data_Início = T.Data_Início
+    Torneios T ON I.Torneio_Nome = T.Nome AND I.Torneio_Data_Inicio = T.Data_Inicio
 WHERE 
     T.Esporte_Nome = 'Basquete'
 GROUP BY 
@@ -83,6 +83,6 @@ GROUP BY
 HAVING 
     COUNT(*) = (
         SELECT COUNT(*)
-        FROM Torneio
+        FROM Torneios
         WHERE Esporte_Nome = 'Basquete'
     );
