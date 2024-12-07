@@ -292,4 +292,3 @@ CREATE TABLE Comenta (
 );
 
 -- 
-SELECT * FROM Jogadores;
