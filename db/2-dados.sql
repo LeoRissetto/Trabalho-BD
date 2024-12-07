@@ -38,7 +38,7 @@ INSERT INTO Locais (nome, rua, numero, estado, cidade, pais, capacidade) VALUES
 ('ESTÁDIO NACIONAL', 'RUA PRINCIPAL', '1234', 'SP', 'SÃO PAULO', 'BRASIL', 50000),
 ('GINÁSIO CENTRAL', 'AVENIDA SECUNDÁRIA', '567', 'RJ', 'RIO DE JANEIRO', 'BRASIL', 12000),
 ('ARENA OLÍMPICA', 'TRAVESSA DOS ATLETAS', '890', 'MG', 'BELO HORIZONTE', 'BRASIL', 30000),
-('ESTÁDIO BARÃO DE SERRA NEGRA', 'RUA SILVA JARDIM', '849', 'SP', 'PIRACICABA', 'BRASIL', 25000);
+('ESTÁDIO BARÃO DE SERRA NEGRA', 'RUA SILVA JARDIM', '849', 'SP', 'PIRACICABA', 'BRASIL', 18799);
 
 -- Tabela de Torneios
 INSERT INTO Torneios (nome, data_inicio, data_fim, esporte_nome) VALUES
@@ -145,7 +145,7 @@ INSERT INTO Investe (patrocinador_cnpj, torneio_nome, torneio_data_inicio, valor
 
 -- Tabela Joga
 INSERT INTO Joga (partida_id, time_nome, time_esporte) VALUES
-(1, 'TIGRES', 'FUTEBOL'),
+(1, 'PUMAS', 'VÔLEI'),
 (2, 'ÁGUIAS', 'BASQUETE'),
 (3, 'XV DE PIRACICABA', 'FUTEBOL'),
 (3, 'MOSFET FC', 'FUTEBOL'),

@@ -51,7 +51,7 @@ GROUP BY
 ORDER BY 
     Media_Idade;
 
--- 4. Locais que receberam mais partidas no torneio "COPA NACIONAL"
+-- 4. Locais que receberam mais partidas no torneio "CAMPEONATO PIRACICABANO DE FUTEBOL"
 SELECT 
     L.Nome AS Local, 
     L.Cidade, 
@@ -62,8 +62,8 @@ FROM
 JOIN 
     Partidas P ON L.ID = P.Local_ID
 WHERE 
-    P.Torneio_Nome = 'COPA NACIONAL'
-    AND P.Torneio_Data_Inicio = '2023-03-01'
+    P.Torneio_Nome = 'CAMPEONATO PIRACICABANO DE FUTEBOL'
+    AND P.Torneio_Data_Inicio = '2023-09-01'
 GROUP BY 
     L.ID, 
     L.Nome, 
@@ -72,7 +72,7 @@ GROUP BY
 ORDER BY 
     Total_Partidas DESC;
 
--- 5. Patrocinadores que investiram em todos os torneios de "BASQUETE"
+-- 5. Patrocinadores que investiram em todos os torneios de "FUTEBOL"
 SELECT 
     P.CNPJ, 
     P.Nome
@@ -83,7 +83,7 @@ JOIN
 JOIN 
     Torneios T ON I.Torneio_Nome = T.Nome AND I.Torneio_Data_Inicio = T.Data_Inicio
 WHERE 
-    T.Esporte_Nome = 'BASQUETE'
+    T.Esporte_Nome = 'FUTEBOL'
 GROUP BY 
     P.CNPJ, 
     P.Nome
@@ -91,5 +91,5 @@ HAVING
     COUNT(*) = (
         SELECT COUNT(*)
         FROM Torneios
-        WHERE Esporte_Nome = 'BASQUETE'
+        WHERE Esporte_Nome = 'FUTEBOL'
     );
