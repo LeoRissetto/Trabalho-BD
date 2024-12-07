@@ -15,7 +15,7 @@ O protótipo apresenta as seguintes funcionalidades:
   - Peso
 
 - **Consultar Jogador:** Permite consultar um jogador no banco de dados utilizando:
-  - CPF ou Nome  
+  - CPF  
   O sistema retorna as informações cadastradas sobre o jogador.
 
 ## Tecnologias Utilizadas
