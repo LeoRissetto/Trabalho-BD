@@ -139,7 +139,7 @@ def consultar_jogador(conn):
 
     # Consulta por CPF
     try:
-        cpf = input("Informe o CPF do jogador que deseja consultar: ").strip()
+        cpf = input("Informe o CPF do jogador que deseja consultar (somente números): ").strip()
         ret, cpf = validar_cpf(cpf)
         if not ret:
             print(cf.red("CPF inválido! Tente novamente."))
