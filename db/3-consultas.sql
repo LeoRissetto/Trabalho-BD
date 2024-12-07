@@ -1,15 +1,23 @@
--- 1. Mostrar todos os torneios e, caso haja, os patrocinadores que investiram neles
+-- 1. Total Investido, Número de Patrocinadores e Nomes dos Patrocinadores por Torneio
 SELECT 
     t.nome AS torneio_nome,
     t.data_inicio AS inicio_torneio,
-    i.patrocinador_cnpj AS patrocinador,
-    i.valor_investido AS valor
+    COUNT(i.patrocinador_cnpj) AS numero_patrocinadores,
+    SUM(i.valor_investido) AS total_investido,
+    string_agg(DISTINCT p.nome, ', ') AS patrocinadores_nomes
 FROM 
     Torneios t
-LEFT OUTER JOIN 
-    Investe i ON t.nome = i.torneio_nome AND t.data_inicio = i.torneio_data_inicio
+LEFT OUTER JOIN Investe i
+ON 
+    t.nome = i.torneio_nome AND t.data_inicio = i.torneio_data_inicio
+LEFT OUTER JOIN Patrocinadores p
+ON 
+    i.patrocinador_cnpj = p.cnpj
+GROUP BY 
+    t.nome, t.data_inicio
 ORDER BY 
-    t.nome, t.data_inicio;
+    t.nome ASC, t.data_inicio DESC;
+
 
 -- 2. Jogadores que participaram de partidas no local "ESTÁDIO NACIONAL"
 SELECT DISTINCT 
