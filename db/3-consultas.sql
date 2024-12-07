@@ -34,18 +34,16 @@ ORDER BY Total_Partidas DESC;
 -- Patrocinadores que investiram em todos os torneios de "Basquete"
 SELECT P.CNPJ, P.Nome
 FROM Patrocinador P
-WHERE NOT EXISTS (
-    SELECT T.Nome, T.Data_Início
-    FROM Torneio T
-    WHERE T.Esporte_Nome = 'Basquete'
-    AND NOT EXISTS (
-        SELECT I.Patrocinador_CNPJ
-        FROM Investe I
-        WHERE I.Patrocinador_CNPJ = P.CNPJ
-        AND I.Torneio_Nome = T.Nome
-        AND I.Torneio_Data_Início = T.Data_Início
-    )
+JOIN Investe I ON P.CNPJ = I.Patrocinador_CNPJ
+JOIN Torneio T ON I.Torneio_Nome = T.Nome AND I.Torneio_Data_Início = T.Data_Início
+WHERE T.Esporte_Nome = 'Basquete'
+GROUP BY P.CNPJ, P.Nome
+HAVING COUNT(*) = (
+    SELECT COUNT(*)
+    FROM Torneio
+    WHERE Esporte_Nome = 'Basquete'
 );
+
 
 
 
