@@ -177,6 +177,7 @@ def consultar_jogador(conn):
 
     except psycopg2.Error as e:
         print(cf.bold_red(f"Erro ao consultar jogador no banco: ") + cf.red("{e}"))
+        conn.rollback()
     
     except Exception as e:
         print(cf.red(f"Erro: {e}"))
