@@ -1,3 +1,9 @@
+-- Leonardo Gueno Rissetto (13676482)
+-- Lucas Lima Romero (13676325)
+-- Luciano Gonçalves Lopes Filho (13676520)
+-- Marco Antonio Gaspar Garcia (11833581)
+-- Thiago Kashivagui Gonçalves (13676579)
+
 -- 1. Total Investido, Número de Patrocinadores e Nomes dos Patrocinadores por Torneio
 SELECT 
     t.nome AS torneio_nome,
